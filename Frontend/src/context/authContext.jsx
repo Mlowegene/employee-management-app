@@ -22,6 +22,7 @@ function authContext({children}) {
             }
           }else {
             setUser(null)
+            setLoading(false)
           }
           
         } catch (error) {
