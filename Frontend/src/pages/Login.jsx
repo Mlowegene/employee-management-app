@@ -1,18 +1,66 @@
-
+import { useState } from "react"
+import { useAuth } from "../context/authContext"
+import { useNavigate } from "react-router-dom"
 function Login() {
+
+const [email, setEmail] = useState('')
+const [password, setPassword] = useState('')
+const [error, setError] = useState(null)
+const {login} = useAuth()
+const navigate = useNavigate()
+
+const HandleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await axios.post(
+      "http://localhost/5000/api/auth/login",
+      { email, password }
+    )
+    if(response.data.success){
+      login(response.data.user)
+      localStorage.setItem("token", response.data.token)
+      if(response.data.user.role === "admin"){
+        navigate("/admin-dashboard")
+      }else {
+        navigate("/employee-dashboard")
+      }
+    }
+    
+  } catch (error) {
+    if(error.response && !error.data.success){
+      setError(error.data.error)
+    }else {
+      setError('Server error')
+    }
+  }
+}
+
   return (
     <div className="flex flex-col items-center h-screen justify-center bg-gradient-to-b from-sky-600 from-50% to-gray-100 to-50% space-y-6">
       <h2 className=" text-3xl text-white">Employee Management System</h2>
       <div className="border shadow p-6 w-96 bg-white">
         <h2 className="text-2xl font-bold mb-4">Login</h2>
-      <form>
+        {error & <p className="text-red-500">{error}</p>}
+      <form onSubmit={HandleSubmit}>
         <div className="mb-4">
           <label htmlFor="email" className="block text-gray-700">Email</label>
-          <input type="email" className="w-full px-3 py-2 border" placeholder="enter your email" />
+          <input 
+          type="email" 
+          onChange={(e)=> setEmail(e.target.value)} 
+          className="w-full px-3 py-2 border" 
+          placeholder="enter your email" 
+          required
+          />
         </div>
         <div className="mb-4">
           <label htmlFor="password" className="block text-gray-700">Password</label>
-          <input type="password" className="w-full px-3 py-2 border" placeholder="*****" />
+          <input 
+          type="password" 
+          onChange={(e)=> setPassword(e.target.value)} 
+          className="w-full px-3 py-2 border" 
+          placeholder="*****" 
+          required
+          />
         </div>
         <div className="mb-4 flex items-center justify-between">
           <label className="inline-flex items-center">
