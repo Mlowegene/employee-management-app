@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function AddDepartment() {
 
@@ -40,11 +41,11 @@ function AddDepartment() {
         <form onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="dep_name" className="text-sm font-medium text-gray-700 ">Department Name</label>
-                <input type="text" onChange={handleChange} placeholder="Enter Dep Name" className="mt-1 w-full p-2 bolder bolder-gray-300 rounded-md" />
+                <input type="text" name="dep_name" onChange={handleChange} placeholder="Enter Dep Name" className="mt-1 w-full p-2 bolder bolder-gray-300 rounded-md" />
             </div>
             <div>
             <label htmlFor="description" className="text-sm font-medium text-gray-700 ">Description</label>
-            <textarea name="description" onChange={handleChange} placeholder="description" className="mt-1 w-full p-2 bolder bolder-gray-300 rounded-md" row="4"></textarea>
+            <textarea name="description" onChange={handleChange} placeholder="description" className="mt-1 w-full p-2 bolder bolder-gray-300 rounded-md" rows="4"></textarea>
             </div>
             <button type="submit" className="w-full mt-6 bg-teal-600 hover:bg-teal-700 text-white font-bold py-2 rounded">Add Department</button>
         </form>
