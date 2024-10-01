@@ -7,6 +7,7 @@ function DepartmentList() {
  
   const [departments, setDepartments] = useState([])
   const [depLoading, setDepLoading] = useState(false)
+  const [filteredDepartment, setFilteredDepartment] = useState([])
 
   const onDepartmentDelete = async (id) => {
     const data = departments.filter(dep => dep._id !== id)
@@ -34,6 +35,7 @@ function DepartmentList() {
                     }
                 ))
                 setDepartments(data)
+                filteredDepartment(data)
             }
         } catch (error) {
             if(error.response && !error.response.data.success) {
@@ -47,6 +49,11 @@ function DepartmentList() {
       fetchDepartment()
     }, [])
     
+    const filterDepartment = (e) => {
+      const records = departments.filter((dep) => dep.dep_name.toLowerCase().includes(e.target.value.toLowerCase()))
+      setFilteredDepartment(records)
+
+    }
 
   return (
     <>
@@ -56,11 +63,11 @@ function DepartmentList() {
         <h3 className='text-2xl font-bold'>MAnage Department</h3>
       </div>
       <div className='flex justify-between items-center'>
-        <input type="text" placeholder="Search by dept name..." className='px-4 py-0.5 border' />
+        <input type="text" placeholder="Search by dept name..." onChange={filterDepartment} className='px-4 py-0.5 border' />
         <Link to="/admin-dashboard/add-department" className='px-4 py-1 bg-teal-400 rounded text-white'>Add New Department</Link>
       </div>
       <div className='mt-5'>
-        <DataTable columns={columns} data={departments} />
+        <DataTable columns={columns} data={filteredDepartment} pagination />
       </div>
     </div>
     }
