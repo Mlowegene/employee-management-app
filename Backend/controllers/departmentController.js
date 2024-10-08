@@ -24,7 +24,7 @@ const getDepartments = async (req, res) => {
         const departments = await Department.find()
         return res.status(200).json({success: true, departments})
     } catch (error) {
-        return res.status(500).json({success: false, error: 'get department server error'})
+        return res.status(500).json({success: false, error: 'get all departments server error'})
     }
 }
 
