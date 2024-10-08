@@ -5,6 +5,6 @@ import authMiddleware from '../middleware/authMiddleware.js';
 const router = express.Router();
 
 router.post("/login", Login)
-router.get("/login", authMiddleware, verify );
+router.get("/verify", authMiddleware, verify );
 
 export default router ;
