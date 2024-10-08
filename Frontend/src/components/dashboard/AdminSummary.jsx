@@ -1,4 +1,5 @@
 import { FaBuilding, FaCheckCircle, FaFileAlt, FaHourglassHalf, FaMoneyBillWave, FaTimesCircle, FaUsers } from "react-icons/fa"
+import SummaryCard from './SummaryCard'
 function AdminSummary() {
   return (
     <div className="p-6">
