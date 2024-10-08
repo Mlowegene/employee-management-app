@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect } from "react"
 import axios from 'axios'
 const userContext = createContext()
 
-function authContext({children}) {
+function AuthContext({children}) {
 
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -38,7 +38,7 @@ function authContext({children}) {
     
 
     const Login = (user) => {
-        setUser(user)
+        setUser(user) 
     }
 
     const Logout = () => {
@@ -55,4 +55,4 @@ function authContext({children}) {
 
 export const useAuth = () => useContext(userContext)
 
-export default authContext
+export default AuthContext;
