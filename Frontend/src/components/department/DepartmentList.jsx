@@ -16,10 +16,9 @@ function DepartmentList() {
 
     useEffect(() => {
       const fetchDepartment = async () => {
-
         setDepLoading(true)
         try {
-            const response = await axios.get('http://localhost/api/department', {
+            const response = await axios.get('http://localhost:5000/api/department', {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -31,11 +30,11 @@ function DepartmentList() {
                         _id: dep._id,
                         sno: sno++,
                         dep_name: dep.dep_name,
-                        action: (<DepartmentButtons _id={dep._id} onDepartmentDelete={onDepartmentDelete} />)
+                        action: (<DepartmentButtons Id={dep._id} onDepartmentDelete={onDepartmentDelete} />)
                     }
                 ))
                 setDepartments(data)
-                filteredDepartment(data)
+                setFilteredDepartment(data)
             }
         } catch (error) {
             if(error.response && !error.response.data.success) {
@@ -57,10 +56,17 @@ function DepartmentList() {
 
   return (
     <>
-    {depLoading ? <div>Loading...</div> : 
+    {depLoading ? 
+      <div className="flex items-center justify-center h-screen">
+        <div className="flex items-center space-x-2">
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
+          <div className="text-blue-500">Loading...</div>
+        </div>
+      </div>
+    : 
     <div className='p-5'>
       <div className='text-center'>
-        <h3 className='text-2xl font-bold'>MAnage Department</h3>
+        <h3 className='text-2xl font-bold'>Manage Department</h3>
       </div>
       <div className='flex justify-between items-center'>
         <input type="text" placeholder="Search by dept name..." onChange={filterDepartment} className='px-4 py-0.5 border' />
