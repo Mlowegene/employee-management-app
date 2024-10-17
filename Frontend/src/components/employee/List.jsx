@@ -9,6 +9,7 @@ function List() {
 
     const [employees, setEmployees] = useState({})
     const [empLoading, setEmpLoading] = useState(false)
+    const [filteredEmployee, setFilteredEmployee] = useState([])
 
     useEffect(() => {
         const fetchEmployees = async () => {
@@ -34,6 +35,7 @@ function List() {
                       }
                   ))
                   setEmployees(data)
+                  setFilteredEmployee(data)
               }
           } catch (error) {
               if(error.response && !error.response.data.success) {
@@ -47,19 +49,37 @@ function List() {
         fetchEmployees()
       }, [])
 
+      const handleFilter = (e) => {
+          const records = employees.filter((emp) => (
+            emp.name.toLowerCase().includes(e.target.value.toLowerCase())
+          ))
+          setFilteredEmployee(records)
+      }
+
   return (
+    <>
+    {empLoading ? 
+        <div className="flex items-center justify-center h-screen">
+        <div className="flex items-center space-x-2">
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
+          <div className="text-blue-500">Loading...</div>
+        </div>
+      </div>
+      : 
     <div className="p-5">
       <div className='text-center'>
         <h3 className='text-2xl font-bold'>Manage Employee</h3>
       </div>
       <div className='flex justify-between items-center'>
-        <input type="text" placeholder="Search by employee name..." className='px-4 py-0.5 border' />
+        <input type="text" onChange={handleFilter} placeholder="Search by employee name..." className='px-4 py-0.5 border' />
         <Link to="/admin-dashboard/add-employee" className='px-4 py-1 bg-teal-400 rounded text-white'>Add New Employee</Link>
       </div>
-      <div>
-        <DataTable columns={columns} data={employees} />
+      <div className="mt-6">
+        <DataTable columns={columns} data={filteredEmployee} pagination />
       </div>
     </div>
+}
+</>
   )
 }
 
