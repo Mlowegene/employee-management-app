@@ -129,4 +129,14 @@ const updateEmployee = async (req, res) => {
     }
 }
 
-export { addEmployee, upload, getEmployees, getEmployee, updateEmployee }; 
+const fetchEmployeeByDepId = async (req, res) => {
+    try {
+        const {id} = req.params;
+        const employees = await Employee.find({department:id})
+        return res.status(200).json({success: true, employees})
+    } catch (error) {
+        return res.status(500).json({success: false, error: 'get employee by DepId server error'})
+    }
+}
+
+export { addEmployee, upload, getEmployees, getEmployee, updateEmployee, fetchEmployeeByDepId }; 
