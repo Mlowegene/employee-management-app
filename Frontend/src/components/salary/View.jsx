@@ -91,7 +91,7 @@ const fetchSalaries = async () => {
                         ))}
                     </tbody>
                 </table>
-            ) : <div>No Records</div>}
+            ) : <div className="flex items-center justify-center text-xl">No Records</div>}
         </div>
     )}
     </>
