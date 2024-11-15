@@ -15,6 +15,9 @@ import Edit from "./components/employee/Edit"
 import AddSalary from "./components/salary/Add"
 import ViewSalary from "./components/salary/View"
 import Summary from "./components/employeeDashboard/Summary"
+import LeavesList from "./components/leaves/LeavesList"
+import LeavesAdd from "./components/leaves/LeavesAdd"
+import Setting from "./components/employeeDashboard/Setting"
 
 function App() {
 
@@ -55,6 +58,12 @@ function App() {
           }>
             <Route index element={<Summary />}></Route>
             <Route path="/employee-dashboard/profile/:id" element={<View />}></Route>
+            <Route path="/employee-dashboard/leaves" element={<LeavesList />}></Route>
+            <Route path="/employee-dashboard/add-leave" element={<LeavesAdd />}></Route>
+            <Route path="/employee-dashboard/salary/:id" element={<ViewSalary />}></Route>
+            <Route path="/employee-dashboard/setting" element={<Setting />}></Route>
+
+
           </Route>
       </Routes>
    </Router>
