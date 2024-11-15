@@ -30,7 +30,7 @@ function EmployeeSideBar() {
           <FaBuilding />
           <span>Leaves</span>
         </NavLink>
-        <NavLink to="/employee-dashboard/salary"
+        <NavLink to={`/employee-dashboard/salary/${user._id}`}
         className={({isActive}) => `${isActive && "bg-blue-500"} flex items-center space-x-4 py-2.5 px-4 rounded`}>   
         <FaCalendarAlt />
           <span>Salary</span>
