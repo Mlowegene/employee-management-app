@@ -19,7 +19,7 @@ const LeavesAdd = () => {
 
     const handleSubmit =async (e) => {
         e.preventDefault();
-
+        
         try {
             const response = await axios.post(`http://localhost:5000/api/leave/add`, leave, {
                 headers: {
@@ -28,7 +28,7 @@ const LeavesAdd = () => {
             })
             
             if(response.data.success) {
-                navigate('/employee-dashboard/leaves ')
+                navigate(`/employee-dashboard/leaves/${user._id} `)
             }
         } catch (error) {
             if(error.response && !error.response.data.success) {

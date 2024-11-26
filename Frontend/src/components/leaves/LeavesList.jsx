@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { useAuth } from "../../context/authContext";
 
 
 let empLoading = false;
 const LeavesList = () => {
-
+  const { id } = useParams();
   const {user} = useAuth();
   const [leaves, setLeaves] = useState([]);
 
@@ -14,7 +14,7 @@ const LeavesList = () => {
 
   const fetchLeaves = async () => {
       try {
-         const response = await axios.get(`http://localhost:5000/api/leave/${user._id}`, {
+         const response = await axios.get(`http://localhost:5000/api/leave/${user._id}/${user.role}`, {
           headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
