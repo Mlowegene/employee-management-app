@@ -18,7 +18,7 @@ function AddDepartment() {
     const handleSubmit =async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.post('http://localhost:5000/api/department/add', department, {
+            const response = await axios.post('https://employee-management-api-one-iota.vercel.app/api/department/add', department, {
                 headers: {
                     "Authorization": `bearer ${localStorage.getItem("token")}`
                 }

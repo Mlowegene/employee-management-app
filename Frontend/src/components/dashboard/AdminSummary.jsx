@@ -10,7 +10,7 @@ const [summary, setSummary] = useState(null)
   useEffect(() => {
    const fetchSummary = async () => {
     try {
-      const data = await axios.get("http://localhost:5000/api/dashboard/summary", {
+      const data = await axios.get("https://employee-management-api-one-iota.vercel.app/api/dashboard/summary", {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
       }

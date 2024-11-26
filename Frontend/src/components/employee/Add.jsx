@@ -35,7 +35,7 @@ function Add() {
         })
 
         try {
-            const response = await axios.post('http://localhost:5000/api/employee/add', employeeDataObj , {
+            const response = await axios.post('https://employee-management-api-one-iota.vercel.app/api/employee/add', employeeDataObj , {
                 headers: {
                     "Authorization": `bearer ${localStorage.getItem("token")}`
                 }

@@ -13,7 +13,7 @@ function EditDepartment() {
   
           setDepLoading(true)
           try {
-              const response = await axios.get(`http://localhost:5000/api/department/${id}`, {
+              const response = await axios.get(`https://employee-management-api-one-iota.vercel.app/api/department/${id}`, {
                   headers: {
                       'Authorization': `Bearer ${localStorage.getItem('token')}`
                   }

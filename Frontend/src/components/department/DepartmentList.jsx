@@ -16,7 +16,7 @@ function DepartmentList() {
   const fetchDepartment = async () => {
     setDepLoading(true)
     try {
-        const response = await axios.get('http://localhost:5000/api/department', {
+        const response = await axios.get('https://employee-management-api-one-iota.vercel.app/api/department', {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
